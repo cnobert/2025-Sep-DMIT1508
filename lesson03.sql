@@ -55,14 +55,28 @@ GO
    - Unassigned lockers have IsAvailable = 1
    =========================== */
 INSERT INTO dbo.Locker (LockerNumber, Building, Floor, IsAvailable, StudentID) VALUES
-  ('M1-101', 'Main',   1, 0, 1),   -- Maria
+  ('M1-101', 'Main',   1, 0, 1),  
   ('M1-102', 'Main',   1, 1, NULL),
   ('T0-015', 'Tech',   0, 1, NULL),
-  ('T1-045', 'Tech',   1, 0, 2),   -- Jason
-  ('N3-301', 'North',  3, 0, 4),   -- Liam
-  ('S2-220', 'South',  2, 0, 3),   -- Aisha
-  ('E1-110', 'East',   1, 0, 5),   -- Sophia
+  ('T1-045', 'Tech',   1, 0, 2),  
+  ('N3-301', 'North',  3, 0, 4),  
+  ('S2-220', 'South',  2, 0, 3),   
+  ('E1-110', 'East',   1, 0, 5),   
   ('W0-005', 'West',   0, 1, NULL),
-  ('G4-410', 'Gym',    4, 0, 6),   -- Ethan
-  ('N1-115', 'North',  1, 0, 7);   -- Olivia
+  ('G4-410', 'Gym',    4, 0, 6), 
+  ('N1-115', 'North',  1, 0, 7);   
 GO
+
+--Exercise 01
+--Write a query that returns the Last names and first names of all the students
+--ordered by last name, first name
+select LastName, FirstName
+from student
+order by LastName, FirstName
+
+--Show LockerNumber, Building, and Floor for lockers that are available.
+select LockerNumber, Building, Floor
+from Locker
+where IsAvailable = 1
+
+select * from locker

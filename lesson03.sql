@@ -67,6 +67,8 @@ INSERT INTO dbo.Locker (LockerNumber, Building, Floor, IsAvailable, StudentID) V
   ('N1-115', 'North',  1, 0, 7);   
 GO
 
+select * from Student
+select * from Locker
 --Exercise 01
 --Write a query that returns the Last names and first names of all the students
 --ordered by last name, first name
@@ -79,4 +81,47 @@ select LockerNumber, Building, Floor
 from Locker
 where IsAvailable = 1
 
-select * from locker
+--Show the first and last names, and the student IDs
+--of only students who have lockers
+
+--"s" and "l" are aliases for the tables - basically variable names
+--by default, joins are "inner joins"
+select s.StudentID, s.FirstName, s.LastName, l.LockerNumber
+from Student s join Locker l on l.StudentID = s.StudentID
+
+--show all students, with lockers when present
+--left asks for "all the rows from the table on the lft, plus any 
+--matching rows from the table on the right"
+select s.StudentID, s.FirstName, s.LastName, l.LockerNumber
+from Student s left join Locker l on l.StudentID = s.StudentID
+
+--right join
+select s.StudentID, s.FirstName, s.LastName, l.LockerNumber
+from Student s right join Locker l on l.StudentID = s.StudentID
+
+--return all students who do not have lockers
+--NEW CONCEPT - when comparing "null", you have to use the "is" keyword
+--NOTE - "select" just decides what info to display
+select s.StudentID, s.FirstName, s.LastName
+from Student s left join Locker l on l.StudentID = s.StudentID
+where l.LockerNumber is null
+
+--return last names and first names of all students who don't have lockers
+select s.LastName + ', ' + s.FirstName as 'Students with no Lockers'
+from Student s left join Locker l on l.StudentID = s.StudentID
+where l.LockerNumber is null
+order by s.LastName
+
+--return the locker number and building of all lockers
+--that are available
+
+select l.LockerNumber, l.Building
+from Student s right join Locker l on s.StudentID = l.StudentID
+where l.StudentID is null
+
+select LockerNumber, Building
+from Locker
+where StudentID is NULL
+-- one solution:
+--from Locker
+-- where IsAvailable = 1

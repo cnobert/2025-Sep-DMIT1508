@@ -83,3 +83,30 @@ where upper(lastName) = 'BROWN'
 select *
 from student
 where lower(lastName) = 'brown'
+
+select upper(FirstName), lower(LastName)
+from student
+
+--date functions
+--getdate() returns today's date
+select getdate()
+
+select left(getdate(), 11) as "Today's date"
+
+--what month are we in? returnst the current month as a number
+select month(getdate()) as 'The current month'
+
+select datename(mm, getdate()) as 'The current month'
+
+-- Extract year of birth for each student
+select FirstName, LastName, year(DateOfBirth) as 'BirthYear'
+from student
+
+--return students born in 2003
+select *
+from Student
+where year(DateOfBirth) = 2003
+
+--return student ages
+select firstname, lastname, DATEDIFF(yy, DateOfBirth, getdate()) as 'Age'
+from student

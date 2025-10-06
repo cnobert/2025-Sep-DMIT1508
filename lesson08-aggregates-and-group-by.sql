@@ -36,23 +36,42 @@ select s.FirstName, s.LastName, count(p.PhoneNumber) 'Number of Phones'
 from Phone p join Student s on p.StudentID = s.StudentID
 group by s.FirstName, s.LastName  
 
---how many students are there in each club
-select c.ClubName, count(sc.StudentID)
+--how many students are there in each club, remember to include clubs that have no students
+select c.ClubName, count(sc.StudentID) 'Number of Student Members'
 from Club c left join StudentClub sc on c.ClubID = sc.ClubID
-group by c.ClubName 
+group by c.ClubName
+
+--"having" is the "where" for "group by"
+--so, "having" can only filter by aggregate function or column names that in "group by"
 
 
-
-
---exercise: in the above, how do get it to count the clubs with no students as well?
---answer:
-select count(sc.StudentID)
+--how many students per club, only club names that begin with "C"
+select c.ClubName, count(sc.StudentID) 'Number of Student Members'
 from Club c left join StudentClub sc on c.ClubID = sc.ClubID
-group by c.ClubName 
+group by c.ClubName
+having c.ClubName like 'C%'
 
+--review: all of the query clauses that we've learned:
+/*
+ * select
+ * from
+ * where
+ * group by
+ * having 
+ * order by
+ */
 
+-- show the buildings that have more than one locker
+select l.Building, count(*) LockerCount
+from Locker l
+group by l.Building 
+having count(*) > 1
 
-
+--List club names where exactly one student is a member.
+select c.ClubName, count(sc.StudentID )
+from club c left join StudentClub sc on c.ClubID = sc.ClubID 
+group by c.ClubName
+having count(sc.StudentID) = 1
 
 
 

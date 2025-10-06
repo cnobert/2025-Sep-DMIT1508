@@ -36,11 +36,19 @@ select s.FirstName, s.LastName, count(p.PhoneNumber) 'Number of Phones'
 from Phone p join Student s on p.StudentID = s.StudentID
 group by s.FirstName, s.LastName  
 
+--how many students are there in each club
+select c.ClubName, count(sc.StudentID)
+from Club c left join StudentClub sc on c.ClubID = sc.ClubID
+group by c.ClubName 
 
 
 
 
-
+--exercise: in the above, how do get it to count the clubs with no students as well?
+--answer:
+select count(sc.StudentID)
+from Club c left join StudentClub sc on c.ClubID = sc.ClubID
+group by c.ClubName 
 
 
 

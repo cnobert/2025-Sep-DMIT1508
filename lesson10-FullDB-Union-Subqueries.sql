@@ -42,4 +42,56 @@ from Enrollment e join Course c on e.CourseID = c.CourseID
 where e.FinalGradePercent is not null
 group by c.CourseCode 
 
+--UNION
+--A UNION stacks rows from compatible 
+--SELECT statements into one result. Think “same columns, more rows.”
+--the columns from each select MUST MATCH
+--union automatically eliminates duplicates
+
+--combine course codes offered in Fall 2025 and Winter 2026
+select CourseCode, Term 
+from Course
+where Term = 'F2025'
+union
+select CourseCode, Term 
+from Course
+where Term = 'W2026'
+
+--return the student ids of all students who have lockers or phones
+select studentID
+from locker 
+where studentid is not null
+union
+select studentid
+from phone
+
+--return the student ids of all students who have both lockers and phones
+select studentID
+from locker 
+where studentid is not null
+intersect
+select studentid
+from phone
+
+--return first and last names of all students who have both lockers and phones
+select s.Firstname, s.Lastname
+from locker l join Student s on l.StudentID = s.StudentID 
+intersect
+select s.Firstname, s.Lastname
+from phone p join Student s on p.StudentID =s.StudentID 
+
+--show studentId, courseId and status for both Active and Completed 
+--enrollments.
+select StudentID, CourseID, Status 
+from Enrollment
+where Status = 'Active'
+union
+select StudentID, CourseID, Status 
+from Enrollment
+where Status = 'Completed'
+
+
+
+
+
 

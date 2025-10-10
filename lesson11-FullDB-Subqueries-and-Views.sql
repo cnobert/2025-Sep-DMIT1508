@@ -42,9 +42,40 @@ and e.FinalGradePercent > --in, not in can be used on subqueries that return man
 		where e2.FinalGradePercent is not null
 	)
 	
+--List students who are enrolled in any course with Term = 'F2025' (use IN).
+--The subquery should return all student IDs that are in Term 'F2025'
 
+--by adding "Not" before "in", we get all the students that are not in 'F2025'
+select s.StudentID, s.FirstName + ' ' + s.LastName as 'Students in F2025'
+from Student s
+where s.StudentID not in 
+	(
+		select e.StudentId
+		from Enrollment e join Course c on c.CourseID = e.CourseID 
+		where c.Term = 'W2026'
+	)
 
+	select * from course
 
+--Show LockerNumber for lockers assigned to students who are in any club 
+
+select l.LockerNumber 'Students with lockers who are in at least one club'
+from Locker l join Student s on l.StudentID = s.StudentID 
+where s.StudentID in 
+	(
+		select sc.StudentID 
+		from StudentClub sc 
+	)
+
+--Find ClubName for clubs that have no members. Use a subquery
+
+select c.ClubName 
+from Club c 
+where c.ClubID not in
+	(
+		select sc.ClubId
+		from StudentClub sc
+	)
 
 
 

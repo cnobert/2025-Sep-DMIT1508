@@ -113,8 +113,8 @@ INSERT INTO dbo.Locker (LockerNumber, Building, Floor, StudentID) VALUES
   ('S2-220', 'South',  2, 3),   -- Aisha Khan
   ('E1-110', 'East',   1, 5),   -- Sophia Brown
   ('W0-005', 'West',   0, NULL), -- Unassigned
-  ('G4-410', 'Gym',    4, 6),   -- Ethan Martin
-  ('N1-115', 'North',  1, 7);   -- Olivia Clark
+  ('G4-410', 'Gym',    4, 6)   -- Ethan Martin
+;   
 
 INSERT INTO dbo.Club (ClubName, Room, MeetingDay) VALUES
   ('Robotics Club','D201','Tuesday'),

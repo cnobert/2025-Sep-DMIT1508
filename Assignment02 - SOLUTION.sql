@@ -62,6 +62,7 @@ SELECT
     COUNT(*) AS AssessmentCount
 FROM ServiceAssessment sa
 GROUP BY DATENAME(MONTH, sa.DueDate)
+order by DATENAME(MONTH, sa.DueDate)
 
 -- Q8 Show the average base fee for each department.
 SELECT s.Department, AVG(s.BaseFee) AS AverageBaseFee
@@ -110,7 +111,7 @@ Use a subquery in the WHERE clause.
 Create a view named vwPetOwners that shows each pet’s name and its owner’s full name.
 Then select all rows from the view.
 */
- CREATE VIEW dbo.vwPetOwners
+CREATE VIEW dbo.vwPetOwners
 AS
 SELECT
     p.PetName AS PetName,

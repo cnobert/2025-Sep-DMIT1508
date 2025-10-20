@@ -56,6 +56,10 @@ end
 exec GetByStudentID 5
 
 
+select * 
+from Student
+where lower(LastName) = lower('wilson')
+
 
 
 

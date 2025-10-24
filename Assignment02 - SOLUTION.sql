@@ -26,7 +26,7 @@ where ps.Status = 'Active'
 order by p.PetName
 
 --Q2 Show the ChipNumbers of all pets who have been serviced by the ‘General’ department.
-SELECT m.ChipNumber
+SELECT distinct m.ChipNumber
 FROM dbo.Microchip m
 JOIN dbo.Pet p ON p.PetID = m.PetID
 JOIN dbo.PetService ps ON ps.PetID = p.PetID

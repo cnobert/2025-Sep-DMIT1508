@@ -58,7 +58,7 @@ begin
 	select @StudentCount = count(*)
 	from Student
 	
-	select 'There are ' + cast(@StudentCount as nvarchar(10)) + ' in the database.'
+	select 'There are students' + cast(@StudentCount as nvarchar(10)) + ' in the database.'
 end
 
 exec StudentCount

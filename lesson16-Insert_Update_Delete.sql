@@ -1,6 +1,6 @@
 /************ INSERTS ************/
-INSERT INTO Club (ClubName, Room, MeetingDay)
-VALUES ('Karaoke', 'W309', 'Monday');
+INSERT INTO Club (ClubName, Room)
+VALUES ('Karaoke', 'W309');
 
 --this puts a null value in the MeetingDay column
 INSERT INTO Club (ClubName, Room)

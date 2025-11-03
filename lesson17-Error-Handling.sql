@@ -21,6 +21,8 @@ where EnrollmentID = 1 and AssessmentID = 1
 delete from Assessment 
 where EnrollmentID = 1 and AssessmentID = 1
 
+
+select * from Student
 /************ DML in a stored procedure ************/
 --in other words, insert/update/delete in a stored procedure
 go
@@ -30,57 +32,30 @@ as
 		delete from Phone
 		where StudentId = @StudentID;
 		
-		if @@error <> 0 --if @@error is not zero, there was an error
-			begin
-				raiserror('Delete Phone failed.', 16, 1)
-			end
-		else --there was no error deleting from Phone
-			begin
-                delete from Locker 
-                where StudentID = @StudentID 
+        delete from Locker 
+        where StudentID = @StudentID 
 
-                if @@error <> 0
-                   begin
-						raiserror('Delete Locker failed.', 16, 1)
-					end
-				else --there was no error deleting from Locker
-                    begin
-                        delete from StudentClub
-                        where StudentId = @StudentID
-                        if @@error <> 0
-                            begin
-                                raiserror('Delete StudentClub failed.', 16, 1)
-                            end
-                        else -- no error deleting from StudentClub
-                           begin
-                                delete from Enrollment
-                                where StudentId = @StudentID
+        delete from StudentClub
+        where StudentId = @StudentID
+                       
+        delete from Enrollment
+        where StudentId = @StudentID
                                 
-                                if @@error <> 0
-                                    begin
-                                        raiserror('Delete Student failed on Enrollment.', 16, 1)
-                                    end
-                                else --no error on Enrollment
-                                    begin
-                                        delete from Student
-                                        where StudentId = @StudentID
+        delete from Student
+        where StudentId = @StudentID
                                         
-                                        if @@error <> 0
-                                            begin
-                                                raiserror('Delete Student failed.', 16, 1)
-                                            end
-                                        else
-                                            begin
-                                                select 'Delete Student was successful'
-                                            end	
-                                    end
-                            end
-                    end
-			end
+        if @@error <> 0
+            begin
+                raiserror('Delete Student failed.', 16, 1)
+            end
+        else
+            begin
+                select 'Delete Student was successful'
+            end	
 	end
-exec DeleteStudent 3
+exec DeleteStudent 1
 
-select * from Phone where StudentID = 2 
+select * from Phone where StudentID = 1
 go
 
 

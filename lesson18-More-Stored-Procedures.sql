@@ -5,7 +5,7 @@
     @@identity - will contain the id of the most recently inserted record
     @@row - will contain the number of rows that were affected by the most recent action
 */
-
+go
 create or alter procedure DeleteStudent 
     @StudentID int 
 as

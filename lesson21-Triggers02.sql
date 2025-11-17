@@ -55,3 +55,40 @@ VALUES (1, '7805551234');
 -- Should fail
 INSERT INTO dbo.Phone (StudentID, PhoneNumber)
 VALUES (2, '7805551234');
+
+/*
+In-class exercise 
+Write an INSERT trigger on Student that enforces this rule:
+ 
+Business rule: No two students can share the same email address.
+ 
+If any row in inserted has an Email that already exists in Student for a different StudentID, the trigger must raise an error and roll back the transaction.
+ 
+Use a join between inserted and Student to check for duplicates.
+ 
+*/
+go
+create or alter trigger trg_Student_PreventDuplicateEmails
+on Student 
+for insert 
+as 
+begin 
+    SET NOCOUNT ON;
+
+    IF EXISTS
+    (
+        SELECT 1
+        FROM inserted AS i
+        JOIN dbo.Student AS s
+            ON s.Email = i.Email
+           AND s.StudentID <> i.StudentID
+    )
+    BEGIN
+        RAISERROR('Email address already exists for another student.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+end
+
+select * from Student
+INSERT INTO dbo.Student (FirstName, LastName, DateOfBirth, Email) VALUES
+  ('John','Brown','2004-03-22','brown.john@example.ca');

@@ -35,7 +35,7 @@ CREATE TABLE dbo.Student
     FirstName   NVARCHAR(50)      NOT NULL,
     LastName    NVARCHAR(50)      NOT NULL,
     DateOfBirth DATE              NULL,
-    Email       NVARCHAR(255)     NULL UNIQUE
+    Email       NVARCHAR(255)     NULL
 );
 
 -- Now the child tables (these reference Student or Club).

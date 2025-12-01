@@ -185,7 +185,7 @@ INSERT INTO dbo.PetService (PetID, ServiceID, EnrollDate, Status, FinalOutcomeNo
    SEED: SERVICEASSESSMENT (Assessments)
    ===================================== */
 
--- Buddy (PetID 1) - Annual Exam &amp; Vaccination
+-- Buddy (PetID 1) - Annual Exam & Vaccination
 INSERT INTO dbo.ServiceAssessment (PetServiceID, Title, Category, DueDate, RecordedAt, Notes) VALUES
 (1, 'Intake Check',             'Exam',         '2025-06-15', '2025-06-15T09:10:00', 'Vitals normal'),
 (1, 'Physical Examination',     'Exam',         '2025-06-15', '2025-06-15T09:30:00', 'Healthy'),
